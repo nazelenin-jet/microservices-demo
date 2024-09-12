@@ -278,6 +278,8 @@ spec:
       volumes:
       - name: redis-data
         emptyDir: {}
+      nodeSelector:
+        node-role.kubernetes.io/workers: ""
 ---
 apiVersion: v1
 kind: Service
