@@ -67,8 +67,6 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-      nodeSelector:
-        node-role.kubernetes.io/workers: ""
         image: {{ .Values.images.repository }}/{{ .Values.adService.name }}:{{ .Values.images.tag | default .Chart.AppVersion }}
         ports:
         - containerPort: 9555
