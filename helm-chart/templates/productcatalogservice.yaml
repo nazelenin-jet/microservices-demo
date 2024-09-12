@@ -35,6 +35,7 @@ metadata:
   labels:
     app: {{ .Values.productCatalogService.name }}
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.productCatalogService.name }}
@@ -97,6 +98,8 @@ spec:
             port: 3550
         resources:
           {{- toYaml .Values.productCatalogService.resources | nindent 10 }}
+      nodeSelector:
+        node-role.kubernetes.io/workers: ""
 ---
 apiVersion: v1
 kind: Service
