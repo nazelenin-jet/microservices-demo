@@ -66,10 +66,13 @@ adService:
     limits:
       cpu: 300m
       memory: 300Mi
+  nodeSelector:
+    node-role.kubernetes.io/workers: ""
 
 cartService:
   create: true
   name: cartservice
+  replicas: 2
   resources:
     requests:
       cpu: 200m
