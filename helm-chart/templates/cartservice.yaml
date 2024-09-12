@@ -33,6 +33,7 @@ metadata:
   labels:
     app: {{ .Values.cartService.name }}
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.cartService.name }}
@@ -92,6 +93,8 @@ spec:
           periodSeconds: 10
           grpc:
             port: 7070
+      nodeSelector:
+        node-role.kubernetes.io/workers: ""
 ---
 apiVersion: v1
 kind: Service
