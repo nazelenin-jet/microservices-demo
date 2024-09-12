@@ -148,21 +148,24 @@ spec:
     targetPort: 8080
 {{- if .Values.frontend.externalService }}
 ---
-apiVersion: v1
-kind: Service
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: {{ .Values.frontend.name }}-external
+  name: {{ .Values.frontend.name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  type: LoadBalancer
-  selector:
-    app: {{ .Values.frontend.name }}
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080
-{{- end }}
-{{- if .Values.networkPolicies.create }}
+  ingressClassName: nginx
+  rules:
+  - host: onlineboutique.stm-ingress-client1.jetru.lab
+    http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
