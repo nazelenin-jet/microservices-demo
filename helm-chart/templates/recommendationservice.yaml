@@ -35,6 +35,7 @@ metadata:
   labels:
     app: {{ .Values.recommendationService.name }}
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.recommendationService.name }}
@@ -99,6 +100,8 @@ spec:
         {{- end }}
         resources:
           {{- toYaml .Values.recommendationService.resources | nindent 10 }}
+      nodeSelector:
+        node-role.kubernetes.io/workers: ""
 ---
 apiVersion: v1
 kind: Service
