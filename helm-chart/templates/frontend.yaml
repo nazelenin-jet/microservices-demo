@@ -35,6 +35,7 @@ metadata:
   labels:
     app: {{ .Values.frontend.name }}
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.frontend.name }}
@@ -130,6 +131,8 @@ spec:
             value: {{ .Values.frontend.singleSharedSession | quote }}
           resources:
             {{- toYaml .Values.frontend.resources | nindent 12 }}
+      nodeSelector:
+        node-role.kubernetes.io/workers: ""
 ---
 apiVersion: v1
 kind: Service
