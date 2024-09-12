@@ -251,9 +251,9 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         {{- if .Values.cartDatabase.inClusterRedis.publicRepository }}
-        image: quay.io/opstree/redis:v6.2.14
+        image: quay.io/opstree/redis
         {{- else }}
-        image: {{ .Values.images.repository }}/redis:alpine
+        image: {{ .Values.images.repository }}/redis:v6.2.14
         {{- end }}
         ports:
         - containerPort: 6379
