@@ -35,6 +35,7 @@ metadata:
   labels:
     app: {{ .Values.checkoutService.name }}
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.checkoutService.name }}
@@ -106,6 +107,8 @@ spec:
         {{- end }}
         resources:
           {{- toYaml .Values.checkoutService.resources | nindent 10 }}
+      nodeSelector:
+        node-role.kubernetes.io/workers: ""          
 ---
 apiVersion: v1
 kind: Service
