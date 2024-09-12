@@ -35,6 +35,7 @@ metadata:
   labels:
     app: {{ .Values.currencyService.name }}
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.currencyService.name }}
@@ -96,6 +97,8 @@ spec:
             port: 7000
         resources:
           {{- toYaml .Values.currencyService.resources | nindent 10 }}
+      nodeSelector:
+        node-role.kubernetes.io/workers: ""
 ---
 apiVersion: v1
 kind: Service
